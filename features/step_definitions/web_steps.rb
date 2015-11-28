@@ -1,3 +1,4 @@
+
 Given(/^I visit index page$/) do
   visit '/'
 end
