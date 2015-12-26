@@ -5,7 +5,7 @@ require 'rubygems'
 class LyricWriter < Sinatra::Base
 
   get '/' do
-    p "Please tell me a phrase you want to incorporate in your lyrics"
+    erb :index
   end
 
     # start the server if ruby file executed directly
