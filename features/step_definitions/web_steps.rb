@@ -134,14 +134,14 @@ Then(/^I should be on path "([^"]*)"$/) do |arg1|
   expect(current_path).to eq arg1
 end
 
-Given(/^I have entered "([^"]*)"$/) do |arg1|
-  fill_in 'phrase', with: arg1
-end
+# Given(/^I have entered "([^"]*)"$/) do |arg1|
+#   fill_in 'phrase', with: arg1
+# end
 
 When(/^I click "([^"]*)"$/) do |arg1|
   click_on 'Submit Phrase'
 end
 
 Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
-  fill_in 'index_phrase', with: arg1
+  fill_in "phrase", with: arg1
 end
