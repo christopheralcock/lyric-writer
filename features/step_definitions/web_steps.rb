@@ -143,5 +143,6 @@ When(/^I click "([^"]*)"$/) do |arg1|
 end
 
 Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
+  visit '/'
   fill_in "phrase", with: arg1
 end
