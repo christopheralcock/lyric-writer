@@ -143,5 +143,5 @@ When(/^I click "([^"]*)"$/) do |arg1|
 end
 
 Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
-  fill_in 'phrase', with: arg1
+  fill_in 'index_phrase', with: arg1
 end
