@@ -8,6 +8,12 @@ class LyricWriter < Sinatra::Base
     erb :index
   end
 
+
+  post '/phrases/new' do
+    redirect '/'
+    p params[:phrase]
+  end
+
     # start the server if ruby file executed directly
   run! if app_file == $0
 end

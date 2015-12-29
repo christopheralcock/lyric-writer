@@ -145,4 +145,6 @@ end
 Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
   visit '/'
   fill_in "phrase", with: arg1
+  fill_in "syllables", with: "5"
+  fill_in "stress-pattern", with: "1 3"
 end

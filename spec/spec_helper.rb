@@ -3,6 +3,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'capybara/cucumber'
+require './app/models/phrase'
 
 Capybara.app = LyricWriter
 
