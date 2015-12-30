@@ -1,17 +1,18 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'rubygems'
+require_relative 'models/phrase'
 
 class LyricWriter < Sinatra::Base
 
   get '/' do
+    @phrases = Phrase.all
     erb :index
   end
 
-
-  post '/phrases/new' do
-    redirect '/'
-    p params[:phrase]
+  post '/phrases' do
+    Phrase.create(phrase: params[:phrase], syllables: params[:syllables], stress_pattern: params[:stress_pattern])
+    redirect to('/')
   end
 
     # start the server if ruby file executed directly
