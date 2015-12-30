@@ -13,6 +13,6 @@ class Phrase
 
 end
 
-DataMapper.setup(:default, "postgres://localhost/lyrics_writer")
+DataMapper.setup(:default, "postgres://localhost/lyrics_writer_test")
 DataMapper.finalize
 DataMapper.auto_upgrade!

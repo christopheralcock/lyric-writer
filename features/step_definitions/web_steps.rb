@@ -148,3 +148,8 @@ Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
   fill_in "syllables", with: "5"
   fill_in "stress_pattern", with: "1 3"
 end
+
+When(/^I enter "([^"]*)" in "([^"]*)"$/) do |arg1, arg2|
+  visit '/'
+  fill_in "syllable pattern", with: :pending # Write code here that turns the phrase above into concrete actions
+end
