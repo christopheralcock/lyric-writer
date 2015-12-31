@@ -134,7 +134,6 @@ Then(/^I should be on path "([^"]*)"$/) do |arg1|
   expect(current_path).to eq arg1
 end
 
-
 When(/^I click "([^"]*)"$/) do |arg1|
   click_on 'Submit Phrase'
 end
