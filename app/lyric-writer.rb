@@ -18,8 +18,8 @@ class LyricWriter < Sinatra::Base
   end
 
   get '/cookies' do
-    cookies[:dictionary] = JSON.dump({})
-    "cookies cleared"
+    cookies[:dictionary] = JSON.dump({"hello"=>2, "i"=>1, "have"=>1, "made"=>1, "a"=>1, "small"=>1, "list"=>1, "of"=>1, "words"=>1, "for"=>1, "debugging"=>3, "reasons"=>2, "long phrase to demonstrate i can put long phrases in"=>13})
+    "cookies set to a sensible set as of 13th feb 2016"
   end
 
   post '/' do
@@ -63,7 +63,6 @@ class LyricWriter < Sinatra::Base
       @haiku << sampler(5)
       @haiku << sampler(7)
       @haiku << sampler(5)
-
     end
 
 
