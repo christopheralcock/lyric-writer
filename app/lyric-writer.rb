@@ -14,23 +14,33 @@ class LyricWriter < Sinatra::Base
     cookies[:dictionary] ||= JSON.dump({})
     @dictionary = JSON.parse(URI.decode(cookies[:dictionary]))
     create_haiku
+    create_user_lines
     erb :index
   end
 
-  get '/cookies' do
-    cookies[:dictionary] = JSON.dump({"hello"=>2, "i"=>1, "have"=>1, "made"=>1, "a"=>1, "small"=>1, "list"=>1, "of"=>1, "words"=>1, "for"=>1, "debugging"=>3, "reasons"=>2, "long phrase to demonstrate i can put long phrases in"=>13})
-    "cookies set to a sensible set as of 13th feb 2016"
+  post '/reset' do
+    cookies[:dictionary] = JSON.dump({"here"=>1, "words"=>1, "are"=>1, "but"=>1, "patterns"=>2, "to be"=>2, "played"=>1, "with"=>1})
+    cookies[:line_structure] = JSON.dump([0])
+    p cookies
+    redirect '/'
   end
 
-  post '/' do
+  post '/add_to_dictionary' do
     cookies[:dictionary] ||= JSON.dump({})
-    parsed = JSON.parse(URI.decode(cookies[:dictionary]))
-    p "parsed object: #{parsed}"
+    parsed_dictionary = JSON.parse(URI.decode(cookies[:dictionary]))
     phrase = params[:phrase]
     syllables = params[:syllables].to_i
-    parsed[phrase] = syllables
-    p "parsed object after adding page contents: #{parsed}"
-    cookies[:dictionary] = JSON.dump(parsed)
+    parsed_dictionary[phrase] = syllables
+    cookies[:dictionary] = JSON.dump(parsed_dictionary)
+    redirect '/'
+  end
+
+  post '/add_line' do
+    cookies[:line_structure] ||= JSON.dump([0])
+    parsed_line_structure = JSON.parse(URI.decode(cookies[:line_structure]))
+    line_length = params[:new_line_length].to_i
+    parsed_line_structure << line_length
+    cookies[:line_structure] = JSON.dump(parsed_line_structure)
     redirect '/'
   end
 
@@ -41,28 +51,50 @@ class LyricWriter < Sinatra::Base
 
   helpers do
 
-    def sampler(line_length)
-      @sample_line = ""
-      sample_line_array = []
-      sample_line_length = line_length
-      @dictionary.shuffle!
-      @dictionary.each do |phrase, syllables|
-        if sample_line_length >= syllables
-          sample_line_array << phrase
-          sample_line_length -= syllables
+    def line_maker(line_length)
+      line_array = []
+      line_filler(line_length, line_array)
+      array_to_text(line_array)
+    end
+
+    def line_filler(line_length, line_array)
+      while line_length > 0 do
+        @dictionary.shuffle!
+        @dictionary.each do |phrase, syllables|
+          if line_length >= syllables
+            line_array << phrase
+            line_length -= syllables
+          end
         end
       end
-      sample_line_array.each do |word|
-        @sample_line += " #{word}"
+    end
+
+    def add_phrase_to_line
+      line_array << phrase
+      line_length -= syllables
+    end
+
+    def array_to_text(line_array)
+      line = ""
+      line_array.each do |word|
+        line += " #{word}"
       end
-      @sample_line
+      line
     end
 
     def create_haiku
       @haiku = []
-      @haiku << sampler(5)
-      @haiku << sampler(7)
-      @haiku << sampler(5)
+      @haiku << line_maker(5)
+      @haiku << line_maker(7)
+      @haiku << line_maker(5)
+    end
+
+    def create_user_lines
+      @user_lines = []
+      line_structure = JSON.parse(URI.decode(cookies[:line_structure]))
+      line_structure.each do |number|
+        @user_lines << line_maker(number)
+      end
     end
 
 

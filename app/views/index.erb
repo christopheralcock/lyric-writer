@@ -1,8 +1,13 @@
+<form method='post' action='/reset'>
+  <input class="button" type='submit' value='reset dictionary to presets and custom lines to 0'>
+</form>
+
+
 <p>Please tell me a phrase you want to incorporate in your lyrics:</p>
 
 
 
-<form method='post' action='/'>
+<form method='post' action='/add_to_dictionary'>
   <input type="text" name="phrase" placeholder="eg. I was born under a wandering star">
   <input type="text" name="syllables" placeholder="eg. 10">
   <input class="button" type='submit' value='Submit Phrase'>
@@ -20,6 +25,17 @@
 <h1>RANDOM HAIKU CREATED FROM DICTIONARY</h1>
 <ul>
   <% @haiku.each do |line| %>
+    <li> <%= line %> </li>
+  <% end %>
+</ul>
+
+<h1>CUSTOM LINE STRUCTURE</h1>
+<form method='post' action='/add_line'>
+  <input type="text" name="new_line_length" placeholder="just a number please">
+  <input class="button" type='submit' value='Add line'>
+</form>
+<ul>
+  <% @user_lines.each do |line| %>
     <li> <%= line %> </li>
   <% end %>
 </ul>
