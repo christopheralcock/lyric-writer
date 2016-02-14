@@ -12,7 +12,7 @@ class LyricWriter < Sinatra::Base
   get '/' do
     cookies[:dictionary] ||= JSON.dump({})
     cookies[:line_structure] ||= JSON.dump([0])
-    @dictionary = JSON.parse(URI.decode(cookies[:dictionary])).sort
+    @dictionary = json_parse(cookies[:dictionary]).sort
     create_haiku
     create_user_lines
     erb :index
@@ -30,7 +30,7 @@ class LyricWriter < Sinatra::Base
 
   post '/add_to_dictionary' do
     cookies[:dictionary] ||= JSON.dump({})
-    parsed_dictionary = JSON.parse(URI.decode(cookies[:dictionary]))
+    parsed_dictionary = json_parse(cookies[:dictionary])
     phrase = params[:phrase]
     syllables = params[:syllables].to_i
     parsed_dictionary[phrase] = syllables
@@ -40,7 +40,7 @@ class LyricWriter < Sinatra::Base
 
   post '/add_line' do
     cookies[:line_structure] ||= JSON.dump([0])
-    parsed_line_structure = JSON.parse(URI.decode(cookies[:line_structure]))
+    parsed_line_structure = json_parse(cookies[:line_structure])
     line_length = params[:new_line_length].to_i
     parsed_line_structure << line_length
     cookies[:line_structure] = JSON.dump(parsed_line_structure)
@@ -87,10 +87,14 @@ class LyricWriter < Sinatra::Base
 
     def create_user_lines
       @user_lines = []
-      line_structure = JSON.parse(URI.decode(cookies[:line_structure]))
+      line_structure = json_parse(cookies[:line_structure])
       line_structure.each do |number|
         @user_lines << line_maker(number)
       end
+    end
+
+    def json_parse(cookies)
+      JSON.parse(URI.decode(cookies))
     end
 
 
