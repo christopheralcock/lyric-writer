@@ -59,19 +59,14 @@ class LyricWriter < Sinatra::Base
 
     def line_filler(line_length, line_array)
       while line_length > 0 do
-        @dictionary.shuffle!
-        @dictionary.each do |phrase, syllables|
+        dictionary = @dictionary.shuffle
+        dictionary.each do |phrase, syllables|
           if line_length >= syllables
             line_array << phrase
             line_length -= syllables
           end
         end
       end
-    end
-
-    def add_phrase_to_line
-      line_array << phrase
-      line_length -= syllables
     end
 
     def array_to_text(line_array)
