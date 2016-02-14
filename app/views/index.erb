@@ -19,6 +19,9 @@
   <% @dictionary.each do |phrase, syllables| %>
     <li>Phrase: "<%= phrase %>", Number of syllables: <%= syllables %></li>
   <% end %>
+  <form method='post' action='/remove_phrase'>
+    <input class="button" type='submit' value='x'>
+  </form>
 </ul>
 
 
