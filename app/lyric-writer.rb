@@ -10,16 +10,16 @@ class LyricWriter < Sinatra::Base
   helpers Sinatra::Cookies
 
   get '/' do
-    cookies[:dictionary] ||= JSON.dump({})
-    cookies[:line_structure] ||= JSON.dump([0])
+    lazy_init_dictionary
+    lazy_init_line_structure
     @dictionary = json_parse(cookies[:dictionary]).sort
     create_haiku
     create_user_lines
     erb :index
   end
 
-  post '/reset_dictionary' do
-    cookies[:dictionary] = JSON.dump({"here"=>1, "words"=>1, "are"=>1, "but"=>1, "patterns"=>2, "to be"=>2, "played"=>1, "with"=>1})
+  post '/clear_dictionary' do
+    cookies[:dictionary] = JSON.dump({"a"=>1})
     redirect '/'
   end
 
@@ -29,7 +29,7 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/add_to_dictionary' do
-    cookies[:dictionary] ||= JSON.dump({})
+    lazy_init_dictionary
     parsed_dictionary = json_parse(cookies[:dictionary])
     phrase = params[:phrase]
     syllables = params[:syllables].to_i
@@ -39,7 +39,7 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/add_line' do
-    cookies[:line_structure] ||= JSON.dump([0])
+    lazy_init_line_structure
     parsed_line_structure = json_parse(cookies[:line_structure])
     line_length = params[:new_line_length].to_i
     parsed_line_structure << line_length
@@ -97,6 +97,13 @@ class LyricWriter < Sinatra::Base
       JSON.parse(URI.decode(cookies))
     end
 
+    def lazy_init_dictionary
+      cookies[:dictionary] ||= JSON.dump({})
+    end
+
+    def lazy_init_line_structure
+      cookies[:line_structure] ||= JSON.dump([0])
+    end
 
   end
 
