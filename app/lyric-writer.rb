@@ -10,6 +10,8 @@ class LyricWriter < Sinatra::Base
   helpers Sinatra::Cookies
 
 
+#TEST
+
   get '/' do
     cookies[:dictionary] ||= JSON.dump({})
     @dictionary = JSON.parse(URI.decode(cookies[:dictionary]))
