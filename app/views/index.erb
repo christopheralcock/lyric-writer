@@ -1,5 +1,5 @@
-<form method='post' action='/reset'>
-  <input class="button" type='submit' value='reset dictionary to presets and custom lines to 0'>
+<form method='post' action='/reset_dictionary'>
+  <input class="button" type='submit' value='reset dictionary to presets'>
 </form>
 
 
@@ -39,3 +39,6 @@
     <li> <%= line %> </li>
   <% end %>
 </ul>
+<form method='post' action='/reset_line_structure'>
+  <input class="button" type='submit' value='clear line structure'>
+</form>

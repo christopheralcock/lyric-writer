@@ -9,21 +9,22 @@ require_relative 'models/hash'
 class LyricWriter < Sinatra::Base
   helpers Sinatra::Cookies
 
-
-#TEST
-
   get '/' do
     cookies[:dictionary] ||= JSON.dump({})
-    @dictionary = JSON.parse(URI.decode(cookies[:dictionary]))
+    cookies[:line_structure] ||= JSON.dump([0])
+    @dictionary = JSON.parse(URI.decode(cookies[:dictionary])).sort
     create_haiku
     create_user_lines
     erb :index
   end
 
-  post '/reset' do
+  post '/reset_dictionary' do
     cookies[:dictionary] = JSON.dump({"here"=>1, "words"=>1, "are"=>1, "but"=>1, "patterns"=>2, "to be"=>2, "played"=>1, "with"=>1})
+    redirect '/'
+  end
+
+  post '/reset_line_structure' do
     cookies[:line_structure] = JSON.dump([0])
-    p cookies
     redirect '/'
   end
 
@@ -81,9 +82,7 @@ class LyricWriter < Sinatra::Base
 
     def create_haiku
       @haiku = []
-      @haiku << line_maker(5)
-      @haiku << line_maker(7)
-      @haiku << line_maker(5)
+      @haiku << line_maker(5) << line_maker(7) << line_maker(5)
     end
 
     def create_user_lines
