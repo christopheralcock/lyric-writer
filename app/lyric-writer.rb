@@ -10,11 +10,13 @@ class LyricWriter < Sinatra::Base
   helpers Sinatra::Cookies
 
   get '/' do
+    p cookies
     lazy_init_dictionary
     lazy_init_line_structure
     @dictionary = json_parse(cookies[:dictionary]).sort
     create_haiku
     create_user_lines
+    p cookies
     erb :index
   end
 
@@ -98,7 +100,7 @@ class LyricWriter < Sinatra::Base
     end
 
     def lazy_init_dictionary
-      cookies[:dictionary] ||= JSON.dump({})
+      cookies[:dictionary] ||= JSON.dump({"a"=>1})
     end
 
     def lazy_init_line_structure
