@@ -22,7 +22,9 @@ class LyricWriter < Sinatra::Base
   end
 
   get '/cookies' do
-    cookies = nil
+    cookies[:dictionary] = JSON.dump({})
+    cookies[:line_structure] = JSON.dump([])
+    "cookies cleared"
   end
 
   post '/clear_dictionary' do
