@@ -43,8 +43,10 @@ class LyricWriter < Sinatra::Base
   
   post '/remove_phrase' do
     lazy_init_dictionary
-    cookies[:remove_phrase] = params[:remove]
-    
+    parsed_dictionary = json_parse(cookies[:dictionary])
+    phrase_to_remove = params[:remove]
+    {parsed_dictionary}.delete!(phrase_to_remove)
+    cookies[:dictionary] = JSON.dump(parsed_dictionary)
     redirect '/'
   end
 
