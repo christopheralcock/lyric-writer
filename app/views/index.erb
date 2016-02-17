@@ -1,13 +1,6 @@
 <a href="https://github.com/christopheralcock/haiku_machine/blob/master/README.md">Here is a link that kind of explains what this does if it's not obvious</a>
 
-<form method='post' action='/clear_dictionary'>
-  <input class="button" type='submit' value='clear dictionary'>
-</form>
-
-
-<p>Please tell me a phrase you want to incorporate in your lyrics:</p>
-
-
+<h1>Please tell me a phrase you want to incorporate in your lyrics:</h1>
 
 <form method='post' action='/add_to_dictionary'>
   <p>Phrase:
@@ -16,7 +9,6 @@
   <input type="text" name="syllables" placeholder="eg. 10"></p>
   <p><input class="button" type='submit' value='Submit Phrase'></p>
 </form>
-
 
 <h1>DICTIONARY</h1>
 <ul>
@@ -28,6 +20,9 @@
   <% end %>
 </ul>
 
+<form method='post' action='/clear_dictionary'>
+  <input class="button" type='submit' value='clear dictionary'>
+</form>
 
 <h1>RANDOM HAIKU CREATED FROM DICTIONARY</h1>
 <ul>
