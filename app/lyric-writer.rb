@@ -53,7 +53,7 @@ class LyricWriter < Sinatra::Base
   post '/add_line' do
     lazy_init_line_structure
     parsed_line_structure = json_parse(cookies[:line_structure])
-    line_length = params[:new_line_length].to_i
+    params[:new_line_length].to_i < 200 ? line_length = params[:new_line_length].to_i : line_length = 200
     parsed_line_structure << line_length
     cookies[:line_structure] = JSON.dump(parsed_line_structure)
     redirect '/'
