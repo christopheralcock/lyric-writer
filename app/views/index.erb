@@ -24,24 +24,26 @@
   <input class="button" type='submit' value='clear dictionary'>
 </form>
 
-<h1>RANDOM HAIKU CREATED FROM DICTIONARY</h1>
-<ul>
-  <% @haiku.each do |line| %>
-    <li> <%= line %> </li>
-  <% end %>
-</ul>
-
 <h1>CUSTOM LINE STRUCTURE</h1>
 <p>eg. if you enter 6, then 6, then 7, then 6, you'll get exciting new lyrics to Happy Birthday</p>
 <form method='post' action='/add_line'>
   <input type="text" name="new_line_length" placeholder="just a number please">
   <input class="button" type='submit' value='Add line'>
 </form>
+
 <ul>
   <% @user_lines.each do |line| %>
     <li> <%= line %> </li>
   <% end %>
 </ul>
+
 <form method='post' action='/reset_line_structure'>
   <input class="button" type='submit' value='clear line structure'>
 </form>
+
+<h1>RANDOM HAIKU CREATED FROM DICTIONARY</h1>
+<ul>
+  <% @haiku.each do |line| %>
+    <li> <%= line %> </li>
+  <% end %>
+</ul>
