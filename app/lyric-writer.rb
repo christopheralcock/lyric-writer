@@ -110,7 +110,7 @@ class LyricWriter < Sinatra::Base
     end
 
     def lazy_init_dictionary
-      cookies[:dictionary] = JSON.dump({"a"=>1})
+      cookies[:dictionary] ||= JSON.dump({"a"=>1})
     end
 
     def lazy_init_line_structure
