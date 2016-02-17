@@ -1,0 +1,16 @@
+<h1>DICTIONARY</h1>
+
+<ul>
+  <% @dictionary.each do |phrase, syllables| %>
+    <li>
+      Phrase: "<%= phrase %>", Number of syllables: <%= syllables %>
+      <form method='post' action='/remove_phrase'>
+        <button type='submit' name='remove' value="<%= phrase %>">x</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
+
+<form method='post' action='/clear_dictionary'>
+  <input class="button" type='submit' value='clear dictionary'>
+</form>

@@ -11,18 +11,18 @@ class LyricWriter < Sinatra::Base
 
   get '/' do
     @cookies = cookies
-    p cookies
     lazy_init_dictionary
     lazy_init_line_structure
     @dictionary = json_parse(cookies[:dictionary]).sort
-    create_haiku
-    create_user_lines
-    p cookies
+    if dictionary_is_valid?
+      create_haiku
+      create_user_lines
+    end
     erb :index
   end
 
   post '/clear_dictionary' do
-    cookies[:dictionary] = JSON.dump({"a"=>1})
+    cookies[:dictionary] = JSON.dump({})
     redirect '/'
   end
 
@@ -45,7 +45,7 @@ class LyricWriter < Sinatra::Base
     lazy_init_dictionary
     parsed_dictionary = json_parse(cookies[:dictionary])
     phrase_to_remove = params[:remove]
-    parsed_dirctionary = parsed_dictionary.tap { |hs| hs.delete(phrase_to_remove) }
+    parsed_dictionary.tap { |phrase| phrase.delete(phrase_to_remove) }
     cookies[:dictionary] = JSON.dump(parsed_dictionary)
     redirect '/'
   end
@@ -84,6 +84,10 @@ class LyricWriter < Sinatra::Base
       end
     end
 
+    def dictionary_is_valid?
+      @dictionary.flatten.include?(1)
+    end
+
     def array_to_text(line_array)
       line = ""
       line_array.each do |word|
@@ -110,7 +114,7 @@ class LyricWriter < Sinatra::Base
     end
 
     def lazy_init_dictionary
-      cookies[:dictionary] ||= JSON.dump({"a"=>1})
+      cookies[:dictionary] ||= JSON.dump({})
     end
 
     def lazy_init_line_structure

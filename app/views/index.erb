@@ -1,7 +1,7 @@
 <a href="https://github.com/christopheralcock/haiku_machine/blob/master/README.md">Here is a link that kind of explains what this does if it's not obvious</a>
 
 <h1>Please tell me a phrase you want to incorporate in your lyrics:</h1>
-
+<p>You need at least one single-syllable phrase, because of maths</p>
 <form method='post' action='/add_to_dictionary'>
   <p>Phrase:
   <input type="text" name="phrase" placeholder="eg. I was born under a wandering star"></p>
@@ -10,43 +10,10 @@
   <p><input class="button" type='submit' value='Submit Phrase'></p>
 </form>
 
-<h1>DICTIONARY</h1>
-<p>if you don't have at least one one syllable phrase in the dictionary at a given time you might break stuff, so watch out, ok?</p>
-<ul>
-  <% @dictionary.each do |phrase, syllables| %>
-    <li>Phrase: "<%= phrase %>", Number of syllables: <%= syllables %></li>
-    <form method='post' action='/remove_phrase'>
-      <button type='submit' name='remove' value="<%= phrase %>">x</button>
-    </form>
-  <% end %>
-</ul>
+<% if dictionary_is_valid? %>
+  <%= erb :dictionary %>
+  <%= erb :custom %>
+  <%= erb :haiku %>
+<% end %>
 
-<form method='post' action='/clear_dictionary'>
-  <input class="button" type='submit' value='clear dictionary'>
-</form>
-
-<h1>CUSTOM LINE STRUCTURE</h1>
-<p>eg. if you enter 6, then 6, then 7, then 6, you'll get exciting new lyrics to Happy Birthday</p>
-<form method='post' action='/add_line'>
-  <input type="text" name="new_line_length" placeholder="just a number please">
-  <input class="button" type='submit' value='Add line'>
-</form>
-
-<ul>
-  <% @user_lines.each do |line| %>
-    <li> <%= line %> </li>
-  <% end %>
-</ul>
-
-<form method='post' action='/reset_line_structure'>
-  <input class="button" type='submit' value='clear line structure'>
-</form>
-
-<h1>RANDOM HAIKU CREATED FROM DICTIONARY</h1>
-<ul>
-  <% @haiku.each do |line| %>
-    <li> <%= line %> </li>
-  <% end %>
-</ul>
-
-yr cookies r <%= @cookies %>
+<p>yr cookies r: <%= @cookies %></p>
