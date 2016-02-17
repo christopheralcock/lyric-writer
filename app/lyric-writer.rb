@@ -21,6 +21,10 @@ class LyricWriter < Sinatra::Base
     erb :index
   end
 
+  get '/cookies' do
+    cookies = nil
+  end
+
   post '/clear_dictionary' do
     cookies[:dictionary] = JSON.dump({})
     redirect '/'
