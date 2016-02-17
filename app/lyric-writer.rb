@@ -42,11 +42,11 @@ class LyricWriter < Sinatra::Base
   end
   
   post '/remove_phrase' do
-    lazy_init_dictionary
-    parsed_dictionary = json_parse(cookies[:dictionary])
-    phrase_to_remove = params[:remove]
-    parsed_dirctionary = parsed_dictionary.tap { |hs| hs.delete(phrase_to_remove) }
-    cookies[:dictionary] = JSON.dump(parsed_dictionary)
+    #lazy_init_dictionary
+    #parsed_dictionary = json_parse(cookies[:dictionary])
+    #phrase_to_remove = params[:remove]
+    #parsed_dirctionary = parsed_dictionary.tap { |hs| hs.delete(phrase_to_remove) }
+    #cookies[:dictionary] = JSON.dump(parsed_dictionary)
     redirect '/'
   end
 
