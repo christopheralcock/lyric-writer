@@ -42,6 +42,9 @@ class LyricWriter < Sinatra::Base
   end
   
   post '/remove_phrase' do
+    lazy_init_dictionary
+    cookies[:remove_phrase] = params[:phrasetoremove]
+    
     redirect '/'
   end
 
