@@ -39,6 +39,10 @@ class LyricWriter < Sinatra::Base
     cookies[:dictionary] = JSON.dump(parsed_dictionary)
     redirect '/'
   end
+  
+  post '/remove_from_dictionary' do
+    redirect '/'
+  end
 
   post '/add_line' do
     lazy_init_line_structure
