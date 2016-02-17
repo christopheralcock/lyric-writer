@@ -40,7 +40,7 @@ class LyricWriter < Sinatra::Base
     redirect '/'
   end
   
-  post '/remove_from_dictionary' do
+  post '/remove_phrase' do
     redirect '/'
   end
 
