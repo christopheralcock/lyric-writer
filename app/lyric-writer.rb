@@ -27,7 +27,7 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/reset_line_structure' do
-    cookies[:line_structure] = JSON.dump([0])
+    cookies[:line_structure] = JSON.dump([])
     redirect '/'
   end
 
@@ -118,7 +118,7 @@ class LyricWriter < Sinatra::Base
     end
 
     def lazy_init_line_structure
-      cookies[:line_structure] ||= JSON.dump([0])
+      cookies[:line_structure] ||= JSON.dump([])
     end
 
   end
