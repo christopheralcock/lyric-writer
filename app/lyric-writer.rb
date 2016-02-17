@@ -114,7 +114,7 @@ class LyricWriter < Sinatra::Base
     end
 
     def lazy_init_line_structure
-      cookies[:line_structure] ||= JSON.dump([0])
+      cookies[:line_structure] = JSON.dump([0])
     end
 
   end
