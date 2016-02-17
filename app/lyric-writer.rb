@@ -10,6 +10,7 @@ class LyricWriter < Sinatra::Base
   helpers Sinatra::Cookies
 
   get '/' do
+    @cookies = cookies
     p cookies
     lazy_init_dictionary
     lazy_init_line_structure
