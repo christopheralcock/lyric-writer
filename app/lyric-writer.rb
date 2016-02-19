@@ -38,7 +38,7 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/add_to_dictionary' do
-    lazy_init_dictionary
+    # lazy_init_dictionary
     parsed_dictionary = json_parse(cookies[:dictionary])
     phrase = params[:phrase]
     syllables = params[:syllables].to_i
@@ -48,7 +48,7 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/remove_phrase' do
-    lazy_init_dictionary
+    # lazy_init_dictionary
     parsed_dictionary = json_parse(cookies[:dictionary])
     phrase_to_remove = params[:remove]
     parsed_dictionary = parsed_dictionary.tap { |phrase| phrase.delete(phrase_to_remove) }
@@ -57,20 +57,25 @@ class LyricWriter < Sinatra::Base
   end
 
   post '/add_line' do
-    lazy_init_line_structure
+    # lazy_init_line_structure
     parsed_line_structure = json_parse(cookies[:line_structure])
-    params[:new_line_length].to_i < 200 ? line_length = params[:new_line_length].to_i : line_length = 200
-    parsed_line_structure << line_length
+    new_lines_array = params[:new_line_length].split(" ")
+    add_arrays_with_limit(new_lines_array, parsed_line_structure, 200)
     cookies[:line_structure] = JSON.dump(parsed_line_structure)
     redirect '/'
   end
-
 
     # start the server if ruby file executed directly
   run! if app_file == $0
 
 
   helpers do
+
+    def add_arrays_with_limit(array1, array2, limit)
+      array1.each do |num|
+        num.to_i < limit ? array2 << num.to_i : array2 << limit
+      end
+    end
 
     def line_maker(line_length)
       line_array = []
