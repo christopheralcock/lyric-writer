@@ -144,7 +144,14 @@ Given(/^I have entered the phrase "([^"]*)"$/) do |arg1|
   fill_in "syllables", with: "1"
 end
 
-When(/^I enter "([^"]*)" in "([^"]*)"$/) do |arg1, arg2|
+Given(/^I have not entered a single\-syllable phrase$/) do
   visit '/'
-  fill_in "syllable pattern", with: :pending # Write code here that turns the phrase above into concrete actions
+  fill_in "phrase", with: "hello"
+  fill_in "syllables", with: "2"
+end
+
+Given(/^I have entered the phrase "([^"]*)" with the syllable count "([^"]*)"$/) do |arg1, arg2|
+  visit '/'
+  fill_in "phrase", with: arg1
+  fill_in "syllables", with: arg2
 end

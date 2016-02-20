@@ -8,6 +8,6 @@ Feature: Submitting phrases
     Then I should see "Please tell me a phrase you want to incorporate in your lyrics"
 
   Scenario: submitting a phrase
-    Given I have entered the phrase "banked on memories"
+    Given I have not entered a single-syllable phrase
     When I click "Submit Phrase"
-    Then I should see "banked on memories"
+    Then I should see "You need at least one single-syllable phrase"

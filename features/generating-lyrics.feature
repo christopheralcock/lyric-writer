@@ -4,6 +4,6 @@ Feature: Generating lyrics
   I want to generate lyrics
 
   Scenario: generating lyrics
-    Given I have entered the phrase "test"
+    Given I have entered the phrase "test" with the syllable count "1"
     And I click "Submit Phrase"
     Then I should see "test test test test test test test"
