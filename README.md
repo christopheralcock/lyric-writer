@@ -1,35 +1,6 @@
-A web app that achieves similar ends to my old Haiku Machine, here
-https://github.com/christopheralcock/haiku_machine
-but made with TDD and hosted for the good people of planet earth.
+Based on my <a href="https://github.com/christopheralcock/haiku_machine
+">Haiku Machine</a>, this is now live, <a href="http://lyricswriter.herokuapp.com">here</a>
 
+It's a simple way to automate the cut up technique of literary composition.  The user gives phrases they wish to appear in the text, and the number of syllables that they pronounce them with, and the number of syllables they want in each line, and the site does the rest.
 
-Data Structure:
-
-songs
-have many
-verses
-have many
-lines
-have many
-syllables
-
-
-
-
-phrases
-have many
-
-
-Columns in Phrase table:   
-ID
-Phrase
-Number of syllables
-Stress pattern of phrase
-
-Columns in Line table:
-ID
-Line
-Stress pattern of line
-
-Columns in Verse table:
-ID
+Future plans include the option of specifying syllabic stress pattens so that effective meter can be implemented.
