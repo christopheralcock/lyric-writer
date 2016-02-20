@@ -5,6 +5,5 @@ Feature: Generating lyrics
 
   Scenario: generating lyrics
     Given I have entered the phrase "test"
-    When I enter "4 3" in "Syllable pattern"
-    And I click "Generate lyrics"
+    And I click "Submit Phrase"
     Then I should see "test test test test test test test"

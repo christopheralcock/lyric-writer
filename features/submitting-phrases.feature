@@ -10,4 +10,4 @@ Feature: Submitting phrases
   Scenario: submitting a phrase
     Given I have entered the phrase "banked on memories"
     When I click "Submit Phrase"
-    Then I should see "Phrase: banked on memories"
+    Then I should see "banked on memories"
