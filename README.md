@@ -1,3 +1,7 @@
+![travis build status](https://travis-ci.org/christopheralcock/lyric-writer.svg "travis build status")
+
+
+
 Based on my <a href="https://github.com/christopheralcock/haiku_machine
 ">Haiku Machine</a>, this is now live, <a href="http://lyricswriter.herokuapp.com">here</a>
 
